@@ -1,14 +1,20 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+//import Home from '../views/Home.vue'
+import FirmwareManager from '@/views/FirmwareManager.vue'
+import DeviceManager from '@/views/DeviceManager.vue'
+
 
 Vue.use(VueRouter)
 
   const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
+  // {
+  //   path: '/',
+  //   name: 'Home',
+  //   component: Home
+  // },
+  { path: '/', 
+    redirect: { name: 'firmware-manager' }
   },
   {
     path: '/about',
@@ -19,6 +25,16 @@ Vue.use(VueRouter)
     component: function () {
       return import(/* webpackChunkName: "about" */ '../views/About.vue')
     }
+  },
+  {
+    path: '/firmware-manager',
+    name: 'firmware-manager',
+    component: FirmwareManager
+  },
+  {
+    path: '/devices-manager',
+    name: 'device-manager',
+    component: DeviceManager
   }
 ]
 
