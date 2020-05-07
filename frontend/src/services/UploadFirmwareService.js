@@ -10,7 +10,7 @@ export default {
   //   return Api().post('uploadphoto', photo)
   // },
   uploadFirmware (firmware) {
-    return Api().post('fimware-upload', firmware)
+    return Api().post('firmware-upload', firmware)
   },
   makeGet (body) {
     console.log('inside gettest frontend')

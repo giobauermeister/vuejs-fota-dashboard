@@ -20,7 +20,7 @@
         ></v-file-input>
       </div>
       <v-btn class="ml-5 mb-5 white--text" left small color="green"
-        v-on:click="makeGet">
+        v-on:click="uploadFirmwareFile">
         <v-icon left dark>mdi-cloud-upload</v-icon>
         Upload        
       </v-btn>
@@ -117,8 +117,13 @@ export default {
     uploadFirmwareFile: function() {
       console.log("uploadFirmwareFile");
       let formData = new FormData();
-      formData.append('file', this.firmwareFile);
+      //formData.append('firmwareFile', this.photo, this.tagid + '.png')
+      formData.append('firmwareFile', this.firmwareFile);
 
+      UploadFirmwareService.uploadFirmware(formData).then(responseUpload => {
+        console.log('response after firmware upload: ');      
+        console.log(responseUpload);
+      });  
       // axios.post('/firmware-upload', 
       // formData, {
       //   headers: {

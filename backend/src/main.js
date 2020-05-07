@@ -22,17 +22,23 @@ const storage = multer.diskStorage({
 });
 const upload = multer({
   storage: storage
-}).single('myImage')
+}).single('firmwareFile')
 
 app.post('/firmware-upload', (req, res) => {
   upload(req, res, (err) => {
+    console.log("trying to save firmware file");    
     console.log(req.body)
+    if(req.body.firmwareFile == 'undefined') {
+      res.sendStatus(400);
+      return;
+    }
     if (err) {
       console.log(err)
-      res.send({'err': 'error'})
+      res.send({'error': err})
     } else {
       console.log(req.file)
-      res.send({'msg': 'OK'})
+      //res.send({'msg': 'OK'})
+      res.sendStatus(200);
     }
   })
 });
