@@ -1,0 +1,19 @@
+{
+  "name": "backend-fota-dashboard",
+  "version": "1.0.0",
+  "description": "the backend for ESP32 firmware over the air (FOTA) Dashboard",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Giovanni Bauermeister",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.7",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "rethinkdb": "^2.4.2"
+  }
+}

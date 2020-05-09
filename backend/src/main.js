@@ -1,18 +1,28 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const cors = require('cors')
-const morgan = require('morgan')
-//const {sequelize} = require('./models')
-const config = require('./config/config')
-const multer = require('multer')
-var path = require('path')
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const morgan = require('morgan');
+//const {sequelize} = require('./models');
+const config = require('./config/config');
+const multer = require('multer');
+var path = require('path');
+var mongo = require('mongodb');
 
-const app = express()
-app.use(morgan('combined'))
-app.use(bodyParser.json())
-app.use(cors())
+var MongoClient = require('mongodb').MongoClient;
+var mongoURL = "mongodb://localhost:27017/mydb";
 
-require('./routes')(app)
+const app = express();
+app.use(morgan('combined'));
+app.use(bodyParser.json());
+app.use(cors());
+
+require('./routes')(app);
+
+MongoClient.connect(mongoURL, function(err, db) {
+  if (err) throw err;
+  console.log("Database created!");
+  db.close();
+});
 
 const storage = multer.diskStorage({
   destination: path.join(__dirname, '../firmware-storage'),
@@ -22,7 +32,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({
   storage: storage
-}).single('firmwareFile')
+}).single('firmwareFile');
 
 app.post('/firmware-upload', (req, res) => {
   upload(req, res, (err) => {
